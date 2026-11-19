@@ -27,12 +27,18 @@ public static class BuildGame
     public static void BuildWeb()
     {
         Build();
+        PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Gzip;
+        PlayerSettings.WebGL.decompressionFallback = true;
+        PlayerSettings.WebGL.dataCaching = true;
+        PlayerSettings.stripEngineCode = true;
+        PlayerSettings.SetManagedStrippingLevel(UnityEditor.Build.NamedBuildTarget.WebGL, ManagedStrippingLevel.High);
+        AssetDatabase.SaveAssets();
         var options = new BuildPlayerOptions
         {
             scenes = new[] { "Assets/Scenes/Expedition.unity" },
-            locationPathName = "Builds/WebGL",
+            locationPathName = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "AtlasOfTheSeventhSun", "WebGL"),
             target = BuildTarget.WebGL,
-            options = BuildOptions.None
+            options = BuildOptions.CleanBuildCache
         };
         BuildReport report = BuildPipeline.BuildPlayer(options);
         if (report.summary.result != BuildResult.Succeeded)

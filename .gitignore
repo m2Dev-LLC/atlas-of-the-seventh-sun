@@ -4,6 +4,7 @@
 [Bb]uild/
 [Bb]uilds/
 [Ll]ogs/
+[Aa]ssets/[Cc]aptures/
 [Uu]ser[Ss]ettings/
 *.csproj
 *.sln*
